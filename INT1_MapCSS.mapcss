@@ -967,7 +967,7 @@ way["seamark:restricted_area:restriction"~=no_fishing]::no_fishing {
 	text-position:          center;
 	/* I don't know how to effectively implement the changing line pattern according to INT-1 N25, improvement/amendment is welcome here */
 }
-*|z17["seamark:restricted_area:information"] {
+*|z17-["seamark:restricted_area:information"]::restricted_area_icon {
     shield-text: 			eval(tag("seamark:restricted_area:information"));
 	text-color:             #8e008e;
     font-size:	            12;
