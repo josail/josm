@@ -729,7 +729,7 @@ relation[boundary=protected_area][!"seamark:restricted_area:restriction"] > way:
 way[boundary=protected_area][!"seamark:restricted_area:restriction"]::protected_area_base {
 	set 					.environmentally_portected_area;
 }
-*["seamark:restricted_area:category"~=pssa]::protected_area_base {
+*["seamark:restricted_area:category"~=pssa]::protected_area_base_pssa {
     major-z-index:			-2;
 	linecap:				none;
 	width:					16;
