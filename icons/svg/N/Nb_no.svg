@@ -91,11 +91,11 @@
          style="fill:#800080;stroke:#ffffff;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1" />
     </g>
     <path
-       style="fill:#800080;fill-rule:evenodd;stroke:#800080;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       style="fill:#800080;fill-rule:evenodd;stroke:#800080;stroke-width:2.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
        d="M 181.04144,125.73291 C 219.20138,167.77791 219.20138,167.77791 219.20138,167.77791"
        id="path2196" />
     <path
-       style="fill:#800080;fill-rule:evenodd;stroke:#800080;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       style="fill:#800080;fill-rule:evenodd;stroke:#800080;stroke-width:2.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
        d="M 219.80572,125.86241 C 181.64578,167.90741 181.64578,167.90741 181.64578,167.90741"
        id="path2198" />
   </g>
