@@ -785,9 +785,9 @@ way["seamark:restricted_area:restriction"~=no_fishing]::no_fishing {
     repeat-image-phase:     75;
 }
 *["seamark:restricted_area:category"~=seahorse_sanctuary]::protected_area_icon {
-    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Seahorse_gn.svg";
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_seahorse_gn.svg";
     icon-height:            36;
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Seahorse_gn.svg";
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_seahorse_gn.svg";
     repeat-image-width:     20;
     repeat-image-spacing:   80;
     repeat-image-phase:     75;
