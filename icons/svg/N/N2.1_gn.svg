@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30" height="30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <title>N2.1: Restriction Area environmentally sensitive sea area green color</title>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>N2.1: Restriction Area environmentally sensitive sea area green color</dc:title>
+    <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+   </cc:Work>
+   <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+   </cc:License>
+  </rdf:RDF>
+ </metadata>
+ <g transform="matrix(0,1,-1,0,30,0)">
+  <path d="m13 0v30h4v-13h13v-4h-13v-13h-4z" color="#000000" fill="#008e00" style="block-progression:tb;text-indent:0;text-transform:none"/>
+ </g>
+</svg>
