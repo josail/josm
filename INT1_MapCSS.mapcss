@@ -11,11 +11,12 @@
 meta {
 	title:				"INT 1 Rendering (IHO standarized symbols) PD";
 	icon:				"https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/IHO_c.svg";
-	author:				"Aun (Skippern) Johnsen";
-	version:			"0.2.1";
+	author:				"Aun (Skippern) Johnsen 2015, 2019, Josail 2023, 2025";
+	version:			"0.3";
 	description:		"JOSM rendering of nautical symbols according to IHO standard INT-1";
 	min-josm-version:	8087;
 }
+/* 2023 update Section J: Nature of Seabed, 2025 update Section N: Areas and Limits */
 
 /* For JOSM, creating a light background color */
 canvas {
@@ -603,50 +604,384 @@ way["seamark:type"=ferry_route]::int1_ferry_route {
 	dashes:			5,8;
 }
 
-/* N: Areas, Limites */
-way["seamark:type"=restricted_area]::restricted_area_base {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1.svg";
-    repeat-image-width:     18;
-    repeat-image-spacing:   8;
-}
-relation[boundary=protected_area] > way::protected_area_base,
-way[boundary=protected_area]::protected_area_base,
-way["seamark:type"=natural_reserve]::protected_area_base {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22.svg";
-    repeat-image-width:     18;
-    repeat-image-spacing:   8;
-}
-way["seamark:restricted_area:restriction"=no_entry]::restricted_area {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.2.svg";
-    repeat-image-width:     20;
-    repeat-image-spacing:   80;
-}
+/* N: Areas and Limits */
+/* 1.6.2025, version 0.3.15, Josail, PD, reference in https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_N */
+/* layer restricted_area_base is used for drawing the area boundary, restricted_area_icon for specific symbols */
+/* anchorage areas without restrictions take a rose dashed line N1.2_ro,svg, restricted_areas and areas with tag restricted_areas:restriction take dashed T-line at the boundary N2.1_ro.svg */
+/* N22: evironmentally sensitive sea areas take a green dashed T-line N2.1_gn.svg at the boundary, when no restriction is specified by tag restricted_areas:restriction */
+/* N22: symbols stay green, even in areas with specified restriction, where the boundary is a rose dashed T-line */
+
 way["seamark:type"=anchorage]::anchorage_base {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1.svg";
-    repeat-image-width:     18;
+	z-index:				-1;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N1.2_ro.svg";
+    repeat-image-width:     9;
     repeat-image-spacing:   8;
 }
-way["seamark:type"=anchorage]::anchorage_area {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg";
-    repeat-image-width:     28;
-    repeat-image-spacing:   80;
+way["seamark:type"=restricted_area]::restricted_area_base, 
+way["seamark:restricted_area:restriction"]::restricted_area_base,
+relation[boundary=restricted_area] > way::restricted_area_base,
+relation["seamark:type"=restricted_area] > way::restricted_area_base {
+	set						.restricted_area;
+	z-index:				-1;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1_ro.svg";
+    repeat-image-width:     9;
+    repeat-image-spacing:   8;
+	
+	/* following lines can be used by uncommenting for highlighting tags for further development */
+	/*
+	text-position:			center;
+	text-offset-y:			30;
+	font-size:				12;
+	font-color:				#ff00ff;
+	max-width:				10;
+	text:					eval(concat(tag("seamark:restricted_area:category"),"; ",tag("seamark:restricted_area:restriction")));
+	*/
 }
-way["seamark:restricted_area:restriction"~=no_anchoring]::anchorage_area {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N20.svg";
-    repeat-image-width:     28;
-    repeat-image-spacing:   80;
+*["seamark:restricted_area:restriction"~=no_entry]::restricted_area,
+*["seamark:restricted_area:category"~=military]::restricted_area {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.2.svg";
+    icon-height:            30;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.2.svg";
+    repeat-image-width:     18;
+    repeat-image-spacing:   82;
+	repeat-image-phase:     00;
 }
-way["seamark:restricted_area:restriction"~=no_fishing]::no_fishing {
-    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N21.svg";
-    repeat-image-width:     28;
-    repeat-image-spacing:   80;
-    repeat-image-phase:    20;
+
+/* N10 to N14: Anchorages  */
+node["seamark:type"=anchorage][!"seamark:anchorage:category"][!name][!ref]::anchorage {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N10.svg";
+    icon-height:            32;
 }
-node["seamark:type"=anchorage]::anchorage {
+way["seamark:type"=anchorage][!"seamark:anchorage:category"][!name][!ref]::anchorage {
     icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg";
     icon-height:            32;
 }
+node["seamark:type"=anchorage]["seamark:anchorage:category"]["seamark:anchorage:category"!=explosives]["seamark:anchorage:category"!=quarantine]["seamark:anchorage:category"!=seaplane]::anchorage,
+node["seamark:type"=anchorage]["name"]::anchorage,
+node["seamark:type"=anchorage]["ref"]::anchorage {     
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg";
+    icon-height:            32;
+	/* Text amendments for N12.2 to N12.6 */
+	text:                   eval(concat(
+	                             cond(tag("seamark:anchorage:category")=deep_water, eval("DW"), eval("")), 
+	                             cond(tag("seamark:anchorage:category")=tanker, eval("Tanker"), eval("")),
+								 tag("name"), " ", tag("ref"),
+								 cond(tag("seamark:anchorage:category")="24_hour", eval("  24 h"), eval("")),
+								 cond(tag("seamark:anchorage:category")=small_craft, eval("  Small Craft"), eval("")),
+								 cond(tag("seamark:anchorage:category")=reserved, eval("  Reserved"), eval(""))
+							));
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-position:          center;
+    text-anchor-horizontal: left;
+	text-anchor-vertical:   center;
+	}
+way["seamark:type"=anchorage]["seamark:anchorage:category"]["seamark:anchorage:category"!=explosives]["seamark:anchorage:category"!=quarantine]["seamark:anchorage:category"!=seaplane]::anchorage,
+way["seamark:type"=anchorage]["name"]::anchorage,
+way["seamark:type"=anchorage]["ref"]::anchorage {     
+	/* Text amendments for N12.2 to N12.6 */
+	text:                   eval(concat(
+	                            cond(tag("seamark:anchorage:category")=deep_water, eval("  DW"), eval("")), 
+	                            cond(tag("seamark:anchorage:category")=tanker, eval("Tanker  "), eval("")),
+								tag("name"), " ", tag("ref"),
+								cond(tag("seamark:anchorage:category")="24_hour", eval("  24 h  "), eval("")),
+								cond(tag("seamark:anchorage:category")=small_craft, eval(" Small Craft            "), eval("")),
+								cond(tag("seamark:anchorage:category")=reserved, eval(" Reserved      "), eval("")),
+								cond(tag("seamark:anchorage:category")=limited_time, eval("Temporal        "), eval("")), 
+								cond(tag("seamark:anchorage:category")=waiting, eval("  WA"), eval(""))								 
+							));
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-position:          center;
+	text-offset-x:          -30;
+	icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg";
+    icon-height:            24;
+	}
+node["seamark:type"=anchorage]["seamark:anchorage:category"=explosives]::anchorage,
+way["seamark:type"=anchorage]["seamark:anchorage:category"=explosives]::anchorage {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.7.svg";
+    icon-height:            32;
+}
+node["seamark:type"=anchorage]["seamark:anchorage:category"=quarantine]::anchorage,
+way["seamark:type"=anchorage]["seamark:anchorage:category"=quarantine]::anchorage {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.8.svg";
+    icon-height:            32;
+}
+node["seamark:type"=anchorage]["seamark:anchorage:category"=seaplane]::anchorage,
+way["seamark:type"=anchorage]["seamark:anchorage:category"=seaplane]::anchorage {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N13.svg";
+    icon-height:            32;
+}
 
+way["seamark:type"=anchorage]::anchorage_area {
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg";
+    repeat-image-width:     22;
+    repeat-image-spacing:   78;
+	repeat-image-phase:     25;
+}
+
+/* N20 to N27: Restricted Areas */
+/* includes N22 green boundary line setup, in case no restrictions take precedence */  
+*["seamark:type"=restricted_area][!"seamark:restricted_area:restriction"]["seamark:restricted_area:category"=~/marine_reserve|essa|pssa|nature_reserve|ecological_reserve|bird_sanctuary|seal_sanctuary|turtle_sanctuary|fish_sanctuary|seahorse_sanctuary|seagrass_sanctuary|kelp_sanctuary|coral_sanctuary|duck_sanctuary|penguin_sanctuary|dolphin_sanctuary|whale_sanctuary|game_reserve/]["seamark:restricted_area:category"!~/safety|degaussing_range|military|historic_wreck|navigational_aid_safety|minefield|swimming|waiting|research|dredging|no_wake|swinging|water_skiing/]::protected_area_base,
+relation[boundary=protected_area][!"seamark:restricted_area:restriction"] > way::protected_area_base,
+way[boundary=protected_area][!"seamark:restricted_area:restriction"]::protected_area_base {
+	set 					.environmentally_portected_area;
+}
+*["seamark:restricted_area:category"~=pssa]::protected_area_base {
+    major-z-index:			-2;
+	linecap:				none;
+	width:					16;
+	color:					#008e00;
+	opacity:				0.3;
+	offset:					-8;
+}
+*.environmentally_portected_area::protected_area_base {
+	z-index:				-1;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1_gn.svg";
+    repeat-image-width:     9;
+    repeat-image-spacing:   8;
+}
+way["seamark:restricted_area:restriction"~=no_anchoring]::anchorage_area {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N20.svg";
+    icon-height:            28;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N20.svg";
+    repeat-image-width:     20;
+    repeat-image-spacing:   80;
+	repeat-image-phase:     25;
+}
+way["seamark:restricted_area:restriction"~=no_fishing]::no_fishing {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N21.svg";
+    icon-height:            40;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N21.svg";
+    repeat-image-width:     30;
+    repeat-image-spacing:   70;
+    repeat-image-phase:     55;
+}
+*["seamark:restricted_area:category"~=bird_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Bird_gn.svg";
+    icon-height:            28;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Bird_gn.svg";
+    repeat-image-width:     22;
+    repeat-image-spacing:   78;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=duck_sanctuary]::protected_area_icon,
+*["seamark:restricted_area:category"~=game_reserve]::protected_area_icon  {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_duck_green.svg";
+    icon-height:            28;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_duck_green.svg";
+    repeat-image-width:     22;
+    repeat-image-spacing:   78;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=seal_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_seal_green.svg";
+    icon-height:            26;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_seal_green.svg";
+    repeat-image-width:     26;
+    repeat-image-spacing:   74;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=seahorse_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Seahorse_gn.svg";
+    icon-height:            36;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Seahorse_gn.svg";
+    repeat-image-width:     20;
+    repeat-image-spacing:   80;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=seagrass_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J13.4gn.svg";
+    icon-height:            30;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J13.4gn.svg";
+    repeat-image-width:     22;
+    repeat-image-spacing:   78;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=kelp_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J13.2br.svg";
+    icon-height:            22;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/J/J13.2br.svg";
+    repeat-image-width:     30;
+    repeat-image-spacing:   70;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=coral_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Coral_gn.svg";
+    icon-height:            28;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Coral_gn.svg";
+    repeat-image-width:     18;
+    repeat-image-spacing:   82;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=fish_sanctuary][!"seamark:restricted_area:restriction"~=no_fishing]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Fish_gn.svg";
+    icon-height:            44;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Fish_gn.svg";
+    repeat-image-width:     30;
+    repeat-image-spacing:   70;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=fish_sanctuary]["seamark:restricted_area:restriction"!~/no_fishing/]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Fish_gn.svg";
+    icon-height:            44;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Fish_gn.svg";
+    repeat-image-width:     30;
+    repeat-image-spacing:   70;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=sea_turtle_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Sea_Turtle_gn.svg";
+    icon-height:            30;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Sea_Turtle_gn.svg";
+    repeat-image-width:     20;
+    repeat-image-spacing:   80;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=penguin_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Penguin_gn.svg";
+    icon-height:            36;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Penguin_gn.svg";
+    repeat-image-width:     20;
+    repeat-image-spacing:   80;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=dolphin_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Dolphin_gn.svg";
+    icon-height:            40;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Dolphin_gn.svg";
+    repeat-image-width:     26;
+    repeat-image-spacing:   74;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=whale_sanctuary]::protected_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Whale_gn.svg";
+    icon-height:            30;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Whale_gn.svg";
+    repeat-image-width:     28;
+    repeat-image-spacing:   72;
+    repeat-image-phase:     75;
+}
+*["seamark:restricted_area:category"~=marine_reserve]::protected_area_icon,
+*["seamark:restricted_area:category"~=nature_reserve]::protected_area_icon,
+*["seamark:restricted_area:category"~=ecological_reserve]::protected_area_icon {
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_MR_green.svg";
+    repeat-image-width:     32;
+    repeat-image-spacing:   68;
+    repeat-image-phase:     80;
+}
+*["seamark:restricted_area:category"~=essa]::protected_area_icon {
+    z-index:				-1;
+    repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_ESSA_gn.svg";
+    repeat-image-width:     44;
+    repeat-image-spacing:   256;
+    repeat-image-phase:     80;
+	repeat-image-align:     top;
+	text:					eval(concat(eval("ESSA  "), tag(ref)));
+	text-color:				#008e00;
+	text-position:			inside;
+	font-size:				16;
+	font-style:				italic; 
+}
+*["seamark:restricted_area:category"~=pssa]::protected_area_icon {
+	repeat-image:           "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_PSSA_gn.svg";
+    repeat-image-width:     42;
+    repeat-image-spacing:   258;
+    repeat-image-phase:     80;
+	repeat-image-align:     top;
+	text:					eval(concat(eval("PSSA  "), tag(ref)));
+	text-color:				#008e00;
+	text-position:			inside;
+	font-size:				16;
+	font-style:				italic; 
+}
+*["seamark:restricted_area:category"=degaussing_range]::restricted_area_icon {
+    text: 					eval("Degaussing Range");
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+}
+*["seamark:restricted_area:category"~=maximum_speed]::restricted_area_icon,
+*["seamark:restricted_area:restriction"~=maximum_speed]::restricted_area_icon {
+    _match: 				regexp_match("(.+?)kn(.+)", concat(tag("seamark:restricted_area:information"," "), " "), "i"); /* _match element 1 = all characters in front of characters "kn" case insensitive, _match element 2 = all characters after kn are disregarded */
+    text: 					cond(get(prop("_match"),1),concat(get(prop("_match"),1), " kn"),tag("seamark:restricted_area:information"));
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+}
+*["seamark:restricted_area:category"~=maximum_speed]::restricted_area_icon,
+*["seamark:restricted_area:restriction"~=maximum_speed]::restricted_area_icon {
+    _match: 				regexp_match("(.+?)kn(.+)", concat(tag("seamark:restricted_area:information"," "), " "), "i"); /* _match element 1 = all characters in front of characters "kn" case insensitive, _match element 2 = all characters after kn are disregarded */
+    text: 					cond(get(prop("_match"),1),concat(get(prop("_match"),1), " kn"),tag("seamark:restricted_area:information"));
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+}
+*["seamark:restricted_area:category"~=no_wake]::restricted_area_icon,
+*["seamark:restricted_area:restriction"~=no_wake]::restricted_area_icon {
+    /* not official, there is no specific INT-1 symbol for such areas, but created based on the no_wake notice mark symbol */
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N27.svg";
+    icon-height:            28;
+}
+*["seamark:restricted_area:category"~=no_wake]["seamark:restricted_area:restriction"~=maximum_speed]::restricted_area_icon {
+	icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N27.svg";
+    icon-height:            28;
+	icon-position: 			center;
+	icon-offset-x:			-20;
+    _match: regexp_match("(.+?)kn(.+)", concat(tag("seamark:restricted_area:information"," "), " "), "i"); /* _match element 1 = all characters in front of characters "kn" case insensitive, _match element 2 = all characters after kn are disregarded */
+    text: cond(get(prop("_match"),1),concat(get(prop("_match"),1), " kn"),tag("seamark:restricted_area:information"));
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+	text-offset-x: 			20;
+}
+
+/* N30 to N34: Military practice areas*/
+/* N31: see implementation with N2.2, remaining section is incomplete, amendments welcome */
+*["seamark:restricted_area:category"=minefield]::restricted_area_icon {
+    text: 					eval("Minefield");
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+}
+
+/* N2.1, N20 to N34, when no restricted_area:category implemented style is found by the list below, the restricted_area:category is displayed as text */
+*["seamark:restricted_area:category"]["seamark:restricted_area:category"!~/bird_sanctuary|duck_sanctuary|game_reserve|seal_sanctuary|seahorse_sanctuary|seagrass_sanctuary|kelp_sanctuary|coral_sanctuary|fish_sanctuary|sea_turtle_sanctuary|peguin_sanctuary|dolphin_sanctuary|whale_sanctuary|marine_reserve|ecological_reserve|nature_reserve|essa|pssa|degaissing_range|maximum_speed|no_wake|minefield/]::restricted_area_icon {
+    text: 					eval(title(replace(tag("seamark:restricted_area:category"), "_", " ")));
+	text-color:             #8e008e;
+    font-size:	            16;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+	/* I don't know how to effectively implement the changing line pattern according to INT-1 N25, improvement/amendment is welcome here */
+}
+*|z17["seamark:restricted_area:information"] {
+    shield-text: 			eval(tag("seamark:restricted_area:information"));
+	text-color:             #8e008e;
+    font-size:	            12;
+	font-style:             italic;
+	text-anchor-horizontal: center;
+	text-position:          center;
+	shield:					#8e008e;
+	shield-opacity:			0.3;
+	shield-frame-width:		2;
+	shield-fram-color:		#8e008e;
+	/* helpful in JOSM checking for additional information on the restricted area, when zooming in  */
+}
+
+/* N40 to N49: Boundaries and Limits  */
 way[boundary],
 area[boundary],
 relation[boundary] > way::int1_border {
@@ -670,6 +1005,16 @@ relation[boundary=administrative][admin_level=2] > way[border_type=territorial].
 	repeat-image-spacing:	3;
 	opacity:				0.05;
 }
+
+/* N60 to N65: Various Limits*/
+/* still missing, please amend */
+
+/* N Supplementary Symbols, Ng Diving prohibited */
+*["seamark:restricted_area:restriction"~=no_diving]::restricted_area_icon {
+    icon-image:             "https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/Nb_no.svg";
+    icon-height:            28;
+}
+
 /* O: Hydrographic Terms */
 /* P: Lights */
 node[man_made=lighthouse]::int1_lighthouse {
