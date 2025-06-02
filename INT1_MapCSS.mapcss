@@ -958,7 +958,7 @@ way["seamark:restricted_area:restriction"~=no_fishing]::no_fishing {
 }
 
 /* N2.1, N20 to N34, when no restricted_area:category implemented style is found by the list below, the restricted_area:category is displayed as text */
-*["seamark:restricted_area:category"]["seamark:restricted_area:category"!~/bird_sanctuary|duck_sanctuary|game_reserve|seal_sanctuary|seahorse_sanctuary|seagrass_sanctuary|kelp_sanctuary|coral_sanctuary|fish_sanctuary|sea_turtle_sanctuary|peguin_sanctuary|dolphin_sanctuary|whale_sanctuary|marine_reserve|ecological_reserve|nature_reserve|essa|pssa|degaissing_range|maximum_speed|no_wake|minefield/]::restricted_area_icon {
+*["seamark:restricted_area:category"]["seamark:restricted_area:category"!~/bird_sanctuary|duck_sanctuary|game_reserve|seal_sanctuary|seahorse_sanctuary|seagrass_sanctuary|kelp_sanctuary|coral_sanctuary|fish_sanctuary|sea_turtle_sanctuary|peguin_sanctuary|dolphin_sanctuary|whale_sanctuary|marine_reserve|ecological_reserve|nature_reserve|essa|pssa|degaissing_range|maximum_speed|no_wake|navigational_aid_safety|military|minefield/]::restricted_area_icon {
     text: 					eval(title(replace(tag("seamark:restricted_area:category"), "_", " ")));
 	text-color:             #8e008e;
     font-size:	            16;
