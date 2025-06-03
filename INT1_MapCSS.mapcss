@@ -967,17 +967,14 @@ way["seamark:restricted_area:restriction"~=no_fishing]::no_fishing {
 	text-position:          center;
 	/* I don't know how to effectively implement the changing line pattern according to INT-1 N25, improvement/amendment is welcome here */
 }
-*|z17-["seamark:restricted_area:information"]::restricted_area_icon {
-    shield-text: 			eval(tag("seamark:restricted_area:information"));
+*|z18-["seamark:restricted_area:information"]::restricted_area_info {
+	text:					eval(tag("seamark:restricted_area:information"));
 	text-color:             #8e008e;
     font-size:	            12;
 	font-style:             italic;
 	text-anchor-horizontal: center;
 	text-position:          center;
-	shield:					#8e008e;
-	shield-opacity:			0.3;
-	shield-frame-width:		2;
-	shield-fram-color:		#8e008e;
+	text-offset-y:			-30;
 	/* helpful in JOSM checking for additional information on the restricted area, when zooming in  */
 }
 
