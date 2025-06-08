@@ -2033,7 +2033,7 @@
         <combo key="seamark:restricted_area:category" text="Category" de.text="Kategorie">
 		  <list_entry value="no_entry" display_value="Area into which entry is prohibited" de.display_value="Sperrgebiet" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.2.svg" icon_size="18"/>
 		  <list_entry value="safety" display_value="Safety zone" de.display_value="Sicherheitszone" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1_ro.svg" icon_size="16"/>
-		  <list_entry value="" display_value=" "/> <!-- space in list-->
+		  <list_entry value=" " display_value=" "/> <!-- space in list-->
 		  <list_entry value="nature_reserve" display_value="Non-specific nature reserve, National Park" de.display_value="Allgemeines Naturschutzgebeit, Nationalpark" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_MR_green.svg" icon_size="22"/>
 		  <list_entry value="marine_reserve" display_value="Marine Reserve (MR)" de.display_value="Maritimes Schutzgebiet (MR)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_MR_green.svg" icon_size="22"/>
 		  <list_entry value="essa" display_value="Environmentally Sensitive Sea Area (ESSA)" de.display_value="Schutzwürdiges Meeresgebiet (ESSA)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_ESSA_gn.svg" icon_size="24"/>
@@ -2054,7 +2054,7 @@
 		  <list_entry value="dolphin_sanctuary" display_value="Dolphin Sanctuary" de.display_value="Delphinschutzgebiet" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Dolphin_gn.svg" icon_size="20"/>
 		  <list_entry value="whale_sanctuary" display_value="Whale Sanctuary" de.display_value="Walschutzgebiet" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_Whale_gn.svg" icon_size="20"/>
 		  <list_entry value="ecological_reserve" display_value="Ecological Reserve" de.display_value="Geschütztes Ökosystem" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N22_MR_green.svg" icon_size="22"/>
-		  <list_entry value=" " display_value="  "/> <!-- space in list-->
+		  <list_entry value="  " display_value="  "/> <!-- space in list-->
           <list_entry value="degaussing_range" display_value="Degaussing_range" de.display_value="Entmagnetisierungsgebiet"  icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1_ro.svg" icon_size="16"/>
           <list_entry value="military" display_value="Military restricted area, entry prohibited" de.display_value="Militärisches Sperrgebiet" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.2.svg" icon_size="20"/>
           <list_entry value="historic_wreck" display_value="Historic Wreck" de.display_value="Historisches Wrack" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N2.1_ro.svg" icon_size="16"/>
@@ -2090,29 +2090,31 @@
         <label text="N10,N12: Anchorage" de.text="N10,N12: Ankerplätze" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg"/>
         <space/>
         <key key="seamark:type" value="anchorage"/>
-        <text key="seamark:name" text="Name"/>
         <combo key="seamark:anchorage:category" text="Category" de.text="Kategorie">
           <list_entry value="small_craft" display_value="Small Craft" de.display_value="Kleinschifffahrt"/>
           <list_entry value="small_craft_mooring" display_value="Small Craft Mooring" de.display_value="Liegeplatz für Kleinschiffe"/>
-          <list_entry value="unrestricted" display_value="unrestricted" de.display_value="ohne Beschränkung"/>
-          <list_entry value="quarantine" display_value="Quarantine" de.display_value="Quarantäne"/>
-          <list_entry value="explosives" display_value="Explosives" de.display_value="Schiffe mit Explosivstoffen"/>
-          <list_entry value="deep_water" display_value="Deep Water (DW)" de.display_value="Tiefwasser (DW)"/>
-          <list_entry value="tanker" display_value="Tanker" de.display_value="Tanker"/>
-          <list_entry value="seaplane" display_value="Seaplane" de.display_value="Wasserflugzeuge"/>
-          <list_entry value="24_hour" display_value="for Periods up to 24 hrs" de.display_value="zetliche Begrenzung bis zu 24 Std."/>
-          <list_entry value="pushing" display_value="Pushing"/>
-          <list_entry value="limited_period" display_value="Limited Period" de.display_value="mit Zeitbegrenzung"/>
-          <list_entry value="non_pushing" display_value="No Pushing"/>
-          <list_entry value="dry_cargo" display_value="Dry Cargo" de.display_value="Trockenladung"/>
-          <list_entry value="raft" display_value="Raft" de.display_value="Floss" />
-		  <list_entry value="waiting_area" display_value="Waiting Area (WA)" de.display_value="Wartebereich (WA)" />
+          <list_entry value="unrestricted" display_value="unrestricted" de.display_value="ohne Beschränkung" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="deep_water" display_value="Deep Water (DW)" de.display_value="Tiefwasser (DW)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="tanker" display_value="Tanker" de.display_value="Tanker" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="24_hour" display_value="for Periods up to 24 hrs" de.display_value="zetliche Begrenzung bis zu 24 Std." icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+		  <list_entry value="waiting_area" display_value="Waiting Area (WA)" de.display_value="Wartebereich (WA)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="explosives" display_value="Explosives" de.display_value="Schiffe mit Explosivstoffen" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.7.svg" icon_size="24"/>
+          <list_entry value="quarantine" display_value="Quarantine" de.display_value="Quarantäne" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.8.svg" icon_size="24"/>
+          <list_entry value="limited_period" display_value="Limited Period" de.display_value="mit Zeitbegrenzung"  icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="seaplane" display_value="Seaplane" de.display_value="Wasserflugzeuge" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N13.svg" icon_size="20"/>
+          <list_entry value="pushing" display_value="Pushing" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="non_pushing" display_value="No Pushing" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="dry_cargo" display_value="Dry Cargo" de.display_value="Trockenladung" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="raft" display_value="Raft" de.display_value="Floss" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
         </combo>
         <multiselect key="seamark:anchorage:restriction" text="Restriction" de.text="Schifffahrtsbeschränkung">
           <reference ref="restrictions"/>
         </multiselect>
+        <text key="seamark:name" text="Name"/>
+		<text key="ref" text="Referenz" display_value="Reference" de.display_value="Kurzbezeichnung"/>
         <text key="seamark:information" text="Additional Information" de.text="Weitere Information"/>
-        <link href="https://wiki.openstreetmap.org/wiki/Seamarks/Anchorages" text="Anchorages"/>
+        <link href="https://wiki.openstreetmap.org/wiki/Seamarks/Anchorages" text="Anchorages" de.text="Ankerplätze"/>
+		<link href="https://https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_N" text="INT-1 Section N: Areas and Limits in OSM wiki" de.text="INT-1 Section N: Gebiete und Grenzen im OSM-Wiki" />
       </item>
       
       <item name="Anchor berth (N11)" de.name="Ankerliegeplätze (N11)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" type="node">
@@ -2120,29 +2122,31 @@
         <space/>
         <key key="seamark:type" value="anchor_berth"/>
         <text key="seamark:name" text="Name"/>
+		<text key="ref" text="Referenz" display_value="Reference" de.display_value="Kurzbezeichnung"/>		
         <text key="seamark:anchor_berth:radius" text="Radius"/>
         <combo key="seamark:anchor_berth:category" text="Category" de.text="Kategorie">
           <list_entry value="small_craft" display_value="Small Craft" de.display_value="Kleinschifffahrt"/>
           <list_entry value="small_craft_mooring" display_value="Small Craft Mooring" de.display_value="Liegeplatz für Kleinschiffe"/>
-          <list_entry value="unrestricted" display_value="unrestricted" de.display_value="ohne Beschränkung"/>
-          <list_entry value="quarantine" display_value="Quarantine" de.display_value="Quarantäne"/>
-          <list_entry value="explosives" display_value="Explosives" de.display_value="Schiffe mit Explosivstoffen"/>
-          <list_entry value="deep_water" display_value="Deep Water (DW)" de.display_value="Tiefwasser (DW)"/>
-          <list_entry value="tanker" display_value="Tanker" de.display_value="Tanker"/>
-          <list_entry value="seaplane" display_value="Seaplane" de.display_value="Wasserflugzeuge"/>
-          <list_entry value="24_hour" display_value="for Periods up to 24 hrs" de.display_value="zetliche Begrenzung bis zu 24 Std."/>
-          <list_entry value="pushing" display_value="Pushing" de.display_value="Schubverband"/>
-          <list_entry value="limited_period" display_value="Limited Period" de.display_value="mit Zeitbegrenzung"/>
-          <list_entry value="non_pushing" display_value="No Pushing" de.display_value="Keine Schubverbände"/>
-          <list_entry value="dry_cargo" display_value="Dry Cargo" de.display_value="Trockenladung"/>
-          <list_entry value="raft" display_value="Raft" de.display_value="Floss" />
-		  <list_entry value="waiting_area" display_value="Waiting Area (WA)" de.display_value="Wartebereich (WA)" />
+          <list_entry value="unrestricted" display_value="unrestricted" de.display_value="ohne Beschränkung" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="deep_water" display_value="Deep Water (DW)" de.display_value="Tiefwasser (DW)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="tanker" display_value="Tanker" de.display_value="Tanker" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="24_hour" display_value="for Periods up to 24 hrs" de.display_value="zetliche Begrenzung bis zu 24 Std." icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+		  <list_entry value="waiting_area" display_value="Waiting Area (WA)" de.display_value="Wartebereich (WA)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="explosives" display_value="Explosives" de.display_value="Schiffe mit Explosivstoffen" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.7.svg" icon_size="24"/>
+          <list_entry value="quarantine" display_value="Quarantine" de.display_value="Quarantäne" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.8.svg" icon_size="24"/>
+          <list_entry value="limited_period" display_value="Limited Period" de.display_value="mit Zeitbegrenzung"  icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="seaplane" display_value="Seaplane" de.display_value="Wasserflugzeuge" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N13.svg" icon_size="20"/>
+          <list_entry value="pushing" display_value="Pushing" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="non_pushing" display_value="No Pushing" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="dry_cargo" display_value="Dry Cargo" de.display_value="Trockenladung" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
+          <list_entry value="raft" display_value="Raft" de.display_value="Floss" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N12.svg" icon_size="20"/>
         </combo>
         <multiselect key="seamark:anchor_berth:restriction" text="Restriction" de.text="Schifffahrtsbeschränkung">
           <reference ref="restrictions"/>
         </multiselect>
         <text key="seamark:information" text="Additional Information" de.text="Weitere Information"/>
-        <link href="https://wiki.openstreetmap.org/wiki/Seamarks/Anchorages" text="Anchorages"/>
+        <link href="https://wiki.openstreetmap.org/wiki/Seamarks/Anchorages" text="Anchorages" de.text="Ankerplätze"/>
+		<link href="https://https://wiki.openstreetmap.org/wiki/Seamarks/INT-1_Section_N" text="INT-1 Section N: Areas and Limits in OSM wiki" de.text="INT-1 Section N: Gebiete und Grenzen im OSM-Wiki" />
       </item>
       
       <item name="Seaplane operation area (N13)" de.name="Operationsgebiet für Wasserflugzeuge (N13)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N13.svg" type="node,closedway">
@@ -2250,8 +2254,8 @@
         </multiselect>
       </item>
       
-      <item name="Maximum Speed (N27)" de.name="Höchstgeschwindigkeit (N27)" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N27.svg" type="closedway">
-        <label text="N27: Maximum Speed" de.text="N27: Höchstgeschwindigkeit" icon="https://raw.githubusercontent.com/OpenNauticalChart/josm/master/icons/svg/N/N27.svg"/>
+      <item name="Maximum Speed (N27)" de.name="Höchstgeschwindigkeit (N27)" type="closedway">
+        <label text="N27: Maximum Speed" de.text="N27: Höchstgeschwindigkeit"/>
         <space/>
         <key key="seamark:type" value="restricted_area"/>
 		<key key="seamark:restricted_area:category" value="maximum_speed"/>
